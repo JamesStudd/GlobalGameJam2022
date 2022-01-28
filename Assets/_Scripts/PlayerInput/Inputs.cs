@@ -44,9 +44,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""41a0a6ae-3cf5-400a-a326-565216c1520a"",
-                    ""expectedControlType"": ""Integer"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
