@@ -73,6 +73,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Replay"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c09c743-dae0-4f58-bc35-60c1e6b235ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -185,6 +193,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3152901-8b03-4fac-a3d6-c43dbfa864f6"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard And Mouse"",
+                    ""action"": ""Replay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +247,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Player_ESlot = m_Player.FindAction("ESlot", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_MousePoint = m_Player.FindAction("MousePoint", throwIfNotFound: true);
+        m_Player_Replay = m_Player.FindAction("Replay", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +304,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ESlot;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_MousePoint;
+    private readonly InputAction m_Player_Replay;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
@@ -295,6 +316,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         public InputAction @ESlot => m_Wrapper.m_Player_ESlot;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @MousePoint => m_Wrapper.m_Player_MousePoint;
+        public InputAction @Replay => m_Wrapper.m_Player_Replay;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -325,6 +347,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @MousePoint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePoint;
                 @MousePoint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePoint;
                 @MousePoint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePoint;
+                @Replay.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReplay;
+                @Replay.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReplay;
+                @Replay.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReplay;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -350,6 +375,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @MousePoint.started += instance.OnMousePoint;
                 @MousePoint.performed += instance.OnMousePoint;
                 @MousePoint.canceled += instance.OnMousePoint;
+                @Replay.started += instance.OnReplay;
+                @Replay.performed += instance.OnReplay;
+                @Replay.canceled += instance.OnReplay;
             }
         }
     }
@@ -381,5 +409,6 @@ public class @Inputs : IInputActionCollection, IDisposable
         void OnESlot(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMousePoint(InputAction.CallbackContext context);
+        void OnReplay(InputAction.CallbackContext context);
     }
 }

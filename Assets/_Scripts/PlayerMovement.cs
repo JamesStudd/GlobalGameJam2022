@@ -2,7 +2,7 @@
 
 namespace _Scripts
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float _movementSpeed;
         [SerializeField] private float _jumpForce;
@@ -17,25 +17,40 @@ namespace _Scripts
         [SerializeField] private float _distToFloorMultiplier = 2.5f;
 
         private PlayerInput _playerInput;
+        private MovementPlayback _movementPlayback;
+
+        private bool _doneInitialMovement = false;
         private int _floorLayer;
         private float _distanceToFloor;
 
+        private bool _canMove = true;
+        
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
-            
+            _movementPlayback = GetComponent<MovementPlayback>();
+
             _floorLayer = LayerMask.NameToLayer("Floor");
             _distanceToFloor = _collider.bounds.extents.y * _distToFloorMultiplier;
+
+            _playerInput.OnReplay += () => _canMove = false;
         }
 
         public void Move(Vector2 input)
         {
+            if (input.magnitude == 0 || !_canMove)
+            {
+                return;
+            }
+            
             float xTranslation = input.x * _movementSpeed * Time.deltaTime * (IsGrounded() ? 1f : _airMovementModifier);
 
             var movement = new Vector3(xTranslation, 0.0f, 0.0f);
             movement = transform.TransformDirection(movement);
             
-            _rigidbody.AddForce(movement, ForceMode.Force);;
+            _rigidbody.AddForce(movement, ForceMode.Force);
+
+            TryStartRecording();
         }
 
         private void Update()
@@ -52,9 +67,10 @@ namespace _Scripts
         
         public void Jump(Vector2 input)
         {
-            if (input.y >= 1 && IsGrounded())
+            if (_canMove && input.y >= 1 && IsGrounded())
             {
                 _rigidbody.AddForce(Vector2.up * _jumpForce);
+                TryStartRecording();
             }
         }
 
@@ -63,9 +79,15 @@ namespace _Scripts
             return Physics.Raycast(transform.position + Vector3.up, transform.TransformDirection(Vector3.down), out var _, _distanceToFloor, ~_floorLayer);
         }
 
-        private void OnDrawGizmos()
+        private void TryStartRecording()
         {
-            Gizmos.DrawRay(transform.position, Vector3.down * _distanceToFloor);
+            if (_doneInitialMovement)
+            {
+                return;
+            }
+
+            _doneInitialMovement = true;
+            _movementPlayback.Record();
         }
     }
 }

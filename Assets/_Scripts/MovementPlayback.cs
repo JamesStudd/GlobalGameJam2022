@@ -4,82 +4,83 @@ using UnityEngine;
 
 public class MovementPlayback : MonoBehaviour
 {
-    bool isRec = false;
-    bool doPlay = false;
-    List<float> nums = new List<float>();
-    float tempX;
-    float tempY;
-    float tempZ;
-    bool playedNoRep = false;
-    public Vector3 startPosi;
-    // Use this for initialization
-    void Start()
-    {
+    private Vector3 _startPosition;
+    
+    private bool _isRec = false;
+    private bool _doPlay = false;
+    private float _tempX;
+    private float _tempY;
+    private float _tempZ;
+    private bool _playedNoRep = false;
+    
+    private readonly List<float> _nums = new List<float>();
 
+    private PlayerInput _playerInput;
+
+    private void Awake()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+
+        _playerInput.OnReplay += Replay;
     }
 
     [ContextMenu("Record")]
     public void Record()
     {
-        if (isRec == true)
-        {
-            isRec = false;
-            transform.position = startPosi;
-        }
-        else if (isRec == false)
-        {
-            startPosi = transform.position;
-            isRec = true;
-            doPlay = false;
-        }
+        _startPosition = transform.position;
+        _isRec = true;
+        _doPlay = false;
     }
 
-    public void FixedUpdate()
+    [ContextMenu("StopRecording")]
+    public void StopRecording()
     {
-        if (playedNoRep == true)
-        {
-            doPlay = false;
-        }
-
-        if (isRec == true)
-        {
-            tempX = transform.position.x;
-            tempY = transform.position.y;
-            tempZ = transform.position.z;
-            nums.Add(tempX);
-            nums.Add(tempY);
-            nums.Add(tempZ);
-        }
-
-        if (doPlay == true)
-        {
-            doPlay = false;
-            StartCoroutine("Playback");
-            Debug.Log(doPlay);
-        }
+        _isRec = false;
+        transform.position = _startPosition;
     }
-
-    public IEnumerator Playback()
+    
+    [ContextMenu("Replay")]
+    public void Replay()
     {
-
-        playedNoRep = true;
-        for (int i = 0; i < nums.Count; i += 3)
-        {
-            transform.position = new Vector3(nums[i], nums[i + 1], nums[i + 2]);
-            yield return new WaitForFixedUpdate();
-        }
+        _isRec = false;
+        _doPlay = true;
+        StartCoroutine(Playback());
     }
-
+    
     [ContextMenu("Reset")]
     public void Reset()
     {
-        nums.Clear();
+        _nums.Clear();
     }
-    [ContextMenu("Play")]
-    public void Play()
+    
+    private void FixedUpdate()
     {
-        isRec = false;
-        doPlay = true;
-        StartCoroutine("Playback");
+        if (_playedNoRep)
+        {
+            _doPlay = false;
+        }
+
+        if (_isRec)
+        {
+            var position = transform.position;
+            
+            _tempX = position.x;
+            _tempY = position.y;
+            _tempZ = position.z;
+            
+            _nums.Add(_tempX);
+            _nums.Add(_tempY);
+            _nums.Add(_tempZ);
+        }
+    }
+
+    private IEnumerator Playback()
+    {
+        _playedNoRep = true;
+        for (int i = 0; i < _nums.Count; i += 3)
+        {
+            transform.position = new Vector3(_nums[i], _nums[i + 1], _nums[i + 2]);
+            yield return new WaitForFixedUpdate();
+        }
     }
 }
