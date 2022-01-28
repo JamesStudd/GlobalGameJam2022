@@ -31,9 +31,9 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "41a0a6ae-3cf5-400a-a326-565216c1520a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -120,28 +120,6 @@
                 },
                 {
                     "name": "",
-                    "id": "de007c46-50c9-48e6-b982-d3c123eb43ae",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard And Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2c2202b5-8a42-4555-814b-023d6a2e0fd4",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard And Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e44e1743-1812-4727-92f6-1fefbbe24a40",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -172,6 +150,28 @@
                     "action": "MousePoint",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Space",
+                    "id": "76e5e6be-6bf1-49fe-acf3-fd2e9dc4db71",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c45a86e0-5c0f-40e3-91e0-3fb8b76bca87",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

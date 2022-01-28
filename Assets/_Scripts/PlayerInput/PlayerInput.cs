@@ -15,7 +15,7 @@ public class PlayerInput : MonoBehaviour
         _inputs = _inputs ?? new Inputs();
         _inputs.Enable();
         //_inputs.Player.Attack.performed += _ => _playerController.Shoot(); <-- Left click
-        _inputs.Player.Jump.performed += _ => _playerController.Jump();
+        //_inputs.Player.Jump.performed += _ => _playerController.Jump();
     }
 
     private void OnEnable()
@@ -32,10 +32,16 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         Move();
+        Jump();
     }
 
     private void Move()
     {
         _playerController.Move(_inputs.Player.Move.ReadValue<Vector2>());
+    }
+
+    private void Jump()
+    {
+        _playerController.Jump(_inputs.Player.Jump.ReadValue<Vector2>());
     }
 }
