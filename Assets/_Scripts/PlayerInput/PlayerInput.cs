@@ -36,6 +36,6 @@ public class PlayerInput : MonoBehaviour
 
     private void Move()
     {
-        //_playerController.Move(_inputs.Player.Move.ReadValue<Vector2>());
+        _playerController.Move(_inputs.Player.Move.ReadValue<Vector2>());
     }
 }
