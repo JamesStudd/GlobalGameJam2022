@@ -34,7 +34,7 @@ public class MovementPlayback : MonoBehaviour
         }
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (playedNoRep == true)
         {
@@ -61,13 +61,15 @@ public class MovementPlayback : MonoBehaviour
 
     public IEnumerator Playback()
     {
+
         playedNoRep = true;
         for (int i = 0; i < nums.Count; i += 3)
         {
             transform.position = new Vector3(nums[i], nums[i + 1], nums[i + 2]);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
+
     [ContextMenu("Reset")]
     public void Reset()
     {
