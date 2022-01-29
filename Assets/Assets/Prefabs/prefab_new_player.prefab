@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 749016927502361872}
   - component: {fileID: 749016927502361873}
   - component: {fileID: -8242606639926351956}
+  - component: {fileID: 4286791811915802886}
   m_Layer: 0
   m_Name: prefab_new_player
   m_TagString: Untagged
@@ -130,17 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa99584d67b472aac4abf3e6f3ef7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 749016927502361872}
-  _characterController: {fileID: -8242606639926351956}
   _movementSpeed: 5
-  _jumpForce: 5
-  _jumpMultiplier: -3
-  _airMovementModifier: 0.1
-  _fallMultiplier: 2.5
-  _lowJumpMultiplier: 5
-  _distToFloorMultiplier: 2.1
-  _maxJumpHeight: 25
-  _maxJumpTime: 12.5
 --- !u!114 &749016927502361870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +188,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &4286791811915802886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749016927502361867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9846ee6dce4a86b740402737db06f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &749016928035803141
 GameObject:
   m_ObjectHideFlags: 0
