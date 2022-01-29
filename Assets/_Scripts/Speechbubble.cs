@@ -21,6 +21,8 @@ public class Speechbubble : MonoBehaviour
 
 	private bool _isTextFinishedDisplaying;
 	private bool _isDelayDecreaseActive;
+
+	private Action _lastCallback;
 	
 	// Use this for initialization
 	void Awake()
@@ -49,7 +51,7 @@ public class Speechbubble : MonoBehaviour
 		Open("Test", () => {});
 	}
 
-	IEnumerator ShowText(Action callback)
+	IEnumerator ShowText()
 	{
 		for (int i = 0; i <= fullText.Length; i++)
 		{
@@ -61,14 +63,13 @@ public class Speechbubble : MonoBehaviour
 
 		_isDelayDecreaseActive = false;
 		_isTextFinishedDisplaying = true;
-		
-		callback?.Invoke();
 	}
 
 	
 	public void Open(string text, Action callback)
 	{
 		_isTextFinishedDisplaying = false;
+		_lastCallback = callback;
 		
 		fullText = text;
 		fullBox.SetActive(true);
@@ -79,7 +80,7 @@ public class Speechbubble : MonoBehaviour
 			StopCoroutine(_speechCoroutine);
 		}
             
-		_speechCoroutine = ShowText(callback);
+		_speechCoroutine = ShowText();
 		StartCoroutine(_speechCoroutine);
 	}
 
@@ -88,5 +89,6 @@ public class Speechbubble : MonoBehaviour
 	{
 		fullBox.SetActive(false);
 		StopCoroutine(_speechCoroutine);
+		_lastCallback?.Invoke();
 	}
 }

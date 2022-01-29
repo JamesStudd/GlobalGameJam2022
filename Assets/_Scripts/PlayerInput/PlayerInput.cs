@@ -33,7 +33,8 @@ public class PlayerInput : MonoBehaviour
         {
             if (FeatureLocker.ReplayingEnabled && FeatureLocker.PlayerInputEnabled)
             {
-                OnReplay?.Invoke();    
+                OnReplay?.Invoke();
+                enabled = false;
             }
         };
     }
