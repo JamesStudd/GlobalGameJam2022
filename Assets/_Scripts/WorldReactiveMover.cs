@@ -6,6 +6,7 @@ namespace _Scripts
     // Is this the worst named class? I think so
     public class WorldReactiveMover : MonoBehaviour
     {
+        [SerializeField] private Transform _root;
         [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private float _movementTime;
 
@@ -16,7 +17,7 @@ namespace _Scripts
 
         private void Awake()
         {
-            _initialPosition = transform.position;
+            _initialPosition = _root.position;
             _endPosition = _initialPosition + _targetPosition;
         }
 
@@ -45,19 +46,24 @@ namespace _Scripts
             
             while (elapsedTime < _movementTime)
             {
-                transform.position = Vector3.Lerp(transform.position, target, (elapsedTime / _movementTime));
+                _root.position = Vector3.Lerp(_root.position, target, (elapsedTime / _movementTime));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
-            transform.position = target;
+            _root.position = target;
         }
         
         private void OnDrawGizmosSelected()
         {
+            if (_root == null)
+            {
+                return;
+            }
+            
             Gizmos.color = Color.blue;
 
-            var position = transform.position;
+            var position = _root.position;
             
             Gizmos.DrawLine(position, position + _targetPosition);
             Gizmos.DrawWireSphere(position + _targetPosition, 0.5f);
