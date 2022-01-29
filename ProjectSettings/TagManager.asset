@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - EndGame
+  - WorldButton
   layers:
   - Default
   - TransparentFX
