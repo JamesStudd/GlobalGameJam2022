@@ -28,6 +28,8 @@ namespace _Scripts
         {
             if (other.gameObject.CompareTag(EndGameTag))
             {
+                Destroy(other.gameObject);
+                FeatureLocker.SetPlayerInputEnabled(false);
                 GameEvents.GameEnd(true);
             }
 

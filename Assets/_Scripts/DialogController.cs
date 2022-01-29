@@ -37,9 +37,14 @@ namespace _Scripts
                 }
                 else
                 {
-                    FeatureLocker.SetPlayerInputEnabled(true);
+                    Invoke(nameof(EnableInput), 0.25f);
                 }
             });
+        }
+
+        private void EnableInput()
+        {
+            FeatureLocker.SetPlayerInputEnabled(true);
         }
     }
 }

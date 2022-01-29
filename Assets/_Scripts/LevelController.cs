@@ -19,6 +19,8 @@ namespace _Scripts
         
         private void Awake()
         {
+            FeatureLocker.SetPlayerInputEnabled(true);
+            
             GameEvents.OnGameEnd += OnGameEnd;
 
             _startTime = Time.realtimeSinceStartup;

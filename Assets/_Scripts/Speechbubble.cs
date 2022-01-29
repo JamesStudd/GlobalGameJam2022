@@ -32,7 +32,7 @@ public class Speechbubble : MonoBehaviour
 		Inputs inputs = new Inputs();
 		inputs.Enable();
 
-		inputs.Player.Attack.performed += _ =>
+		inputs.Player.Jump.performed += _ =>
 		{
 			if (_isTextFinishedDisplaying)
 			{
