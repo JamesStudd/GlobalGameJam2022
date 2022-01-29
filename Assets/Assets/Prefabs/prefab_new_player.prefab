@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7400b1b26f45b840b407fafc478eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _replayOnEnd: 1
+  _pauseTime: 1
 --- !u!143 &-8242606639926351956
 CharacterController:
   m_ObjectHideFlags: 0

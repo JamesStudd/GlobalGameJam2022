@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MovementPlayback : MonoBehaviour
 {
+    [SerializeField] private bool _replayOnEnd;
+    [SerializeField] private float _pauseTime;
+
     private Vector3 _startPosition;
     
     private bool _isRec = false;
     private float _tempX;
     private float _tempY;
     private float _tempZ;
-    private bool _playedNoRep = false;
     
     private readonly List<float> _nums = new List<float>();
 
@@ -67,11 +69,25 @@ public class MovementPlayback : MonoBehaviour
 
     private IEnumerator Playback()
     {
-        _playedNoRep = true;
         for (int i = 0; i < _nums.Count; i += 3)
         {
             transform.position = new Vector3(_nums[i], _nums[i + 1], _nums[i + 2]);
             yield return new WaitForFixedUpdate();
+        }
+
+        yield return new WaitForSeconds(_pauseTime);
+        
+        if (_replayOnEnd)
+        {
+            for (int i = _nums.Count - 1; i >= 0; i -= 3)
+            {
+                transform.position = new Vector3(_nums[i - 2], _nums[i - 1], _nums[i - 0]); 
+                yield return new WaitForFixedUpdate();
+            }
+            
+            yield return new WaitForSeconds(_pauseTime);
+            
+            Replay();
         }
     }
 }
