@@ -36,6 +36,8 @@ namespace _Scripts
         private bool _hasStartedRecording = false;
 
         private bool CanMove => FeatureLocker.PlayerInputEnabled;
+
+        private Quaternion _originalRotation;
         
         // Awake is called earlier than Start in Unity's event life cycle
         private void Awake()
@@ -45,7 +47,13 @@ namespace _Scripts
             _characterController = GetComponent<CharacterController>();
             _movementPlayback = GetComponent<MovementPlayback>();
 
-            _playerInput.OnReplay += () => enabled = false;
+            _originalRotation = transform.rotation;
+            
+            _playerInput.OnReplay += () =>
+            {
+                transform.rotation = _originalRotation;
+                enabled = false;
+            };
 
             SetupJumpVariables();
         }
