@@ -5,6 +5,7 @@ namespace _Scripts
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float _movementSpeed;
+        [SerializeField] private float _rotationFactorPerFrame;
         
         // declare reference variables
         private CharacterController _characterController;
@@ -73,6 +74,24 @@ namespace _Scripts
             _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
         }
 
+        void HandleRotation()
+        {
+            Vector3 positionToLookAt;
+            // the change in position our character should point to
+            positionToLookAt.x = 0;
+            positionToLookAt.y = 0;
+            positionToLookAt.z = -_currentMovement.x;
+            // the current rotation of our character
+            Quaternion currentRotation = transform.rotation;
+
+            if (_isMovementPressed) {
+                // creates a new rotation based on where the player is currently pressing
+                Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+                // rotate the character to face the positionToLookAt            
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+            }
+        }
+        
         private void HandleJump()
         {
             if (!_isJumping && _characterController.isGrounded && _isJumpPressed)
@@ -124,6 +143,8 @@ namespace _Scripts
         // Update is called once per frame
         private void Update()
         {
+            HandleRotation();
+            
             _isJumpPressed = _playerInput.IsHoldingJump;
             
             _appliedMovement.x = _currentMovement.x;

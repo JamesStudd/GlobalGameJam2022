@@ -54,7 +54,7 @@ namespace _Scripts
                 _currentPlayer.GetComponent<MovementPlayback>().OnReplayed -= SpawnPlayer;
             }
             
-            _currentPlayer = Instantiate(_playerPrefab, _spawnPoint, Quaternion.identity);
+            _currentPlayer = Instantiate(_playerPrefab, _spawnPoint, _playerPrefab.transform.rotation);
             _currentPlayer.OnReplayed += SpawnPlayer;
 
             _respawnsDone++;
