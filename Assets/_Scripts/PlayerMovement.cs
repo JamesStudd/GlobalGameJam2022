@@ -11,7 +11,8 @@ namespace _Scripts
         
         // declare reference variables
         private CharacterController _characterController;
-        private PlayerInput _playerInput; // NOTE: PlayerInput class must be generated from New Input System in Inspector
+        private PlayerInput _playerInput;
+        private MovementPlayback _movementPlayback;
 
         // variables to store player input values
         private Vector2 _currentMovementInput;
@@ -34,12 +35,15 @@ namespace _Scripts
         
         private Coroutine _currentJumpResetRoutine = null;
 
+        private bool _hasStartedRecording = false;
+        
         // Awake is called earlier than Start in Unity's event life cycle
         private void Awake()
         {
             // initially set reference variables
             _playerInput = GetComponent<PlayerInput>();
             _characterController = GetComponent<CharacterController>();
+            _movementPlayback = GetComponent<MovementPlayback>();
 
             _playerInput.OnReplay += () => enabled = false;
 
@@ -52,11 +56,17 @@ namespace _Scripts
 
             _currentMovement.x = _currentMovementInput.x * _movementSpeed;
             _isMovementPressed = _currentMovementInput.x != 0;
+
+            if (_isMovementPressed)
+            {
+                TryStartRecording();
+            }
         }
 
         public void Jump(Vector2 input)
         {
             _isJumpPressed = input.y != 0;
+            TryStartRecording();
         }
 
         private void SetupJumpVariables()
@@ -126,6 +136,17 @@ namespace _Scripts
 
             HandleGravity();
             HandleJump();
+        }
+
+        private void TryStartRecording()
+        {
+            if (_hasStartedRecording)
+            {
+                return;
+            }
+
+            _hasStartedRecording = true;
+            _movementPlayback.Record();
         }
     }
 }
