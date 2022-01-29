@@ -21,6 +21,12 @@ public class Speechbubble : MonoBehaviour
 		fullBox.SetActive(false);
 	}
 
+	[ContextMenu("TestOpen")]
+	void TestOpen()
+	{
+		Open("Test");
+	}
+
 	IEnumerator ShowText()
 	{
 		for (int i = 0; i <= fullText.Length; i++)
@@ -31,11 +37,20 @@ public class Speechbubble : MonoBehaviour
 		}
 	}
 
-	[ContextMenu("Open")]
-	void Open()
+	
+	void Open(string text)
 	{
+		fullText = text;
 		fullBox.SetActive(true);
 		fullBox.transform.DOShakeScale(.5f, 2);
 		StartCoroutine(ShowText());
+	}
+
+	[ContextMenu("Close")]
+	void Close()
+	{
+		fullBox.SetActive(false);
+		
+		StopCoroutine(ShowText());
 	}
 }
