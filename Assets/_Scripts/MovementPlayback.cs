@@ -7,7 +7,6 @@ public class MovementPlayback : MonoBehaviour
     private Vector3 _startPosition;
     
     private bool _isRec = false;
-    private bool _doPlay = false;
     private float _tempX;
     private float _tempY;
     private float _tempZ;
@@ -29,7 +28,6 @@ public class MovementPlayback : MonoBehaviour
     {
         _startPosition = transform.position;
         _isRec = true;
-        _doPlay = false;
     }
 
     [ContextMenu("StopRecording")]
@@ -43,7 +41,6 @@ public class MovementPlayback : MonoBehaviour
     public void Replay()
     {
         _isRec = false;
-        _doPlay = true;
         StartCoroutine(Playback());
     }
     
@@ -55,23 +52,17 @@ public class MovementPlayback : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (_playedNoRep)
-        {
-            _doPlay = false;
-        }
-
-        if (_isRec)
-        {
-            var position = transform.position;
+        if (!_isRec) return;
+        
+        var position = transform.position;
             
-            _tempX = position.x;
-            _tempY = position.y;
-            _tempZ = position.z;
+        _tempX = position.x;
+        _tempY = position.y;
+        _tempZ = position.z;
             
-            _nums.Add(_tempX);
-            _nums.Add(_tempY);
-            _nums.Add(_tempZ);
-        }
+        _nums.Add(_tempX);
+        _nums.Add(_tempY);
+        _nums.Add(_tempZ);
     }
 
     private IEnumerator Playback()

@@ -33,7 +33,11 @@ namespace _Scripts
             _floorLayer = LayerMask.NameToLayer("Floor");
             _distanceToFloor = _collider.bounds.extents.y * _distToFloorMultiplier;
 
-            _playerInput.OnReplay += () => _canMove = false;
+            _playerInput.OnReplay += () =>
+            {
+                _rigidbody.isKinematic = true;
+                _canMove = false;
+            };
         }
 
         public void Move(Vector2 input)
