@@ -4,22 +4,25 @@ namespace _Scripts
 {
     public class LevelController : MonoBehaviour
     {
-        [SerializeField] private PlayerInput _playerPrefab;
+        [SerializeField] private MovementPlayback _playerPrefab;
         [SerializeField] private Vector3 _spawnPoint;
         [SerializeField] private int _respawnsAllowed;
         
         [SerializeField] private GameEndView _gameEndView;
 
-        private PlayerInput _currentPlayer;
+        private MovementPlayback _currentPlayer;
 
         private int _respawnsDone;
         private float _startTime;
+
+        public static int SpawnCount = 0;
         
         private void Awake()
         {
             GameEvents.OnGameEnd += OnGameEnd;
 
             _startTime = Time.realtimeSinceStartup;
+            SpawnCount = 0;
         }
 
         private void OnDestroy()
@@ -48,13 +51,14 @@ namespace _Scripts
             
             if (_currentPlayer != null)
             {
-                _currentPlayer.OnReplay -= SpawnPlayer;
+                _currentPlayer.GetComponent<MovementPlayback>().OnReplayed -= SpawnPlayer;
             }
             
             _currentPlayer = Instantiate(_playerPrefab, _spawnPoint, Quaternion.identity);
-            _currentPlayer.OnReplay += SpawnPlayer;
+            _currentPlayer.OnReplayed += SpawnPlayer;
 
             _respawnsDone++;
+            SpawnCount++;
         }
 
         private void OnDrawGizmosSelected()

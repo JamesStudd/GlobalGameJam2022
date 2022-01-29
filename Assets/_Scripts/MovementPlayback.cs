@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementPlayback : MonoBehaviour
 {
-    [SerializeField] private bool _replayOnEnd;
     [SerializeField] private float _pauseTime;
 
     private Vector3 _startPosition;
@@ -18,6 +18,8 @@ public class MovementPlayback : MonoBehaviour
 
     private PlayerInput _playerInput;
 
+    public event Action OnReplayed;
+    
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -69,25 +71,32 @@ public class MovementPlayback : MonoBehaviour
 
     private IEnumerator Playback()
     {
-        for (int i = 0; i < _nums.Count; i += 3)
-        {
-            transform.position = new Vector3(_nums[i], _nums[i + 1], _nums[i + 2]);
-            yield return new WaitForFixedUpdate();
-        }
-
-        yield return new WaitForSeconds(_pauseTime);
+        var initial = true;
         
-        if (_replayOnEnd)
+        while (true)
         {
-            for (int i = _nums.Count - 1; i >= 0; i -= 3)
+            if (initial)
             {
-                transform.position = new Vector3(_nums[i - 2], _nums[i - 1], _nums[i - 0]); 
-                yield return new WaitForFixedUpdate();
+                for (int i = _nums.Count - 1; i >= 0; i -= 3)
+                {
+                    transform.position = new Vector3(_nums[i - 2], _nums[i - 1], _nums[i - 0]); 
+                    yield return new WaitForFixedUpdate();
+                }
+                
+                OnReplayed?.Invoke();
             }
             
-            yield return new WaitForSeconds(_pauseTime);
-            
-            Replay();
+            for (int i = 0; i < _nums.Count; i += 3)
+            {
+                transform.position = new Vector3(_nums[i], _nums[i + 1], _nums[i + 2]);
+                yield return new WaitForFixedUpdate();
+            }
+
+            transform.position = _startPosition;
+
+            initial = false;
+
+            yield return null;
         }
     }
 }
