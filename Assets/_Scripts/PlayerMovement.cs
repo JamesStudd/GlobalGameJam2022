@@ -1,97 +1,131 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Scripts
 {
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float _movementSpeed;
-        [SerializeField] private float _jumpForce;
-        [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Collider _collider;
-        [SerializeField] private float _airMovementModifier = 0.1f;
-        [SerializeField] private float _speedLimit = 10f;
         
-        [SerializeField] private float _fallMultiplier = 10f;
-        [SerializeField] private float _lowJumpMultiplier = 10f;
+        // declare reference variables
+        private CharacterController _characterController;
+        private PlayerInput _playerInput; // NOTE: PlayerInput class must be generated from New Input System in Inspector
+
+        // variables to store player input values
+        private Vector2 _currentMovementInput;
+        private Vector3 _currentMovement;
+        private Vector3 _appliedMovement;
+        private bool _isMovementPressed;
+
+        // gravity variables
+        private float _gravity = -9.8f;
+        private float _groundedGravity = -.05f;
+        private float _maxJumpHeight = 2.0f;
+        private float _maxJumpTime = 0.75f;
         
-        [SerializeField] private float _distToFloorMultiplier = 2.5f;
+        private float _initialJumpVelocity;
 
-        private PlayerInput _playerInput;
-        private MovementPlayback _movementPlayback;
-
-        private bool _doneInitialMovement = false;
-        private int _floorLayer;
-        private float _distanceToFloor;
-
-        private bool _canMove = true;
+        // jumping variables
+        private bool _isJumpPressed = false;
+        private bool _isJumping = false;
+        private int _jumpCount = 0;
         
+        private Coroutine _currentJumpResetRoutine = null;
+
+        // Awake is called earlier than Start in Unity's event life cycle
         private void Awake()
         {
+            // initially set reference variables
             _playerInput = GetComponent<PlayerInput>();
-            _movementPlayback = GetComponent<MovementPlayback>();
+            _characterController = GetComponent<CharacterController>();
 
-            _floorLayer = LayerMask.NameToLayer("Floor");
-            _distanceToFloor = _collider.bounds.extents.y * _distToFloorMultiplier;
+            _playerInput.OnReplay += () => enabled = false;
 
-            _playerInput.OnReplay += () =>
-            {
-                _rigidbody.isKinematic = true;
-                _canMove = false;
-            };
+            SetupJumpVariables();
         }
 
         public void Move(Vector2 input)
         {
-            if (input.magnitude == 0 || !_canMove)
-            {
-                return;
-            }
-            
-            float xTranslation = input.x * _movementSpeed * Time.deltaTime * (IsGrounded() ? 1f : _airMovementModifier);
+            _currentMovementInput = input;
 
-            var movement = new Vector3(xTranslation, 0.0f, 0.0f);
-            movement = transform.TransformDirection(movement);
-            
-            _rigidbody.AddForce(movement, ForceMode.Force);
-
-            TryStartRecording();
+            _currentMovement.x = _currentMovementInput.x * _movementSpeed;
+            _isMovementPressed = _currentMovementInput.x != 0;
         }
 
-        private void Update()
-        {
-            if (_rigidbody.velocity.y < 0)
-            {
-                _rigidbody.velocity += Vector3.up * (Physics.gravity.y * (_fallMultiplier - 1) * Time.deltaTime);
-            }
-            else if (_rigidbody.velocity.y > 0 && !_playerInput.IsHoldingJump)
-            {
-                _rigidbody.velocity += Vector3.up * (Physics.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime);
-            }
-        }
-        
         public void Jump(Vector2 input)
         {
-            if (_canMove && input.y >= 1 && IsGrounded())
+            _isJumpPressed = input.y != 0;
+        }
+
+        private void SetupJumpVariables()
+        {
+            float timeToApex = _maxJumpTime / 2;
+            _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+            _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
+        }
+
+        private void HandleJump()
+        {
+            if (!_isJumping && _characterController.isGrounded && _isJumpPressed)
             {
-                _rigidbody.AddForce(Vector2.up * _jumpForce);
-                TryStartRecording();
+                if (_jumpCount < 3 && _currentJumpResetRoutine != null)
+                {
+                    StopCoroutine(_currentJumpResetRoutine);
+                }
+
+                _isJumping = true;
+                _jumpCount += 1;
+                _currentMovement.y = _initialJumpVelocity;
+                _appliedMovement.y = _initialJumpVelocity;
+            }
+            else if (!_isJumpPressed && _isJumping && _characterController.isGrounded)
+            {
+                _isJumping = false;
             }
         }
 
-        private bool IsGrounded()
+        private void HandleGravity()
         {
-            return Physics.Raycast(transform.position + Vector3.up, transform.TransformDirection(Vector3.down), out var _, _distanceToFloor, ~_floorLayer);
+            bool isFalling = _currentMovement.y <= 0.0f || !_isJumpPressed;
+            float fallMultiplier = 2.0f;
+            // apply proper gravity if the player is grounded or not
+            if (_characterController.isGrounded)
+            {
+                _currentMovement.y = _groundedGravity;
+                _appliedMovement.y = _groundedGravity;
+
+                // additional gravity applied after reaching apex of jump
+            }
+            else if (isFalling)
+            {
+                float previousYVelocity = _currentMovement.y;
+                _currentMovement.y = _currentMovement.y + (_gravity * fallMultiplier * Time.deltaTime);
+                _appliedMovement.y = Mathf.Max((previousYVelocity + _currentMovement.y) * .5f, -20.0f);
+
+                // applied when character is not grounded
+            }
+            else
+            {
+                float previousYVelocity = _currentMovement.y;
+                _currentMovement.y = _currentMovement.y + (_gravity * Time.deltaTime);
+                _appliedMovement.y = (previousYVelocity + _currentMovement.y) * .5f;
+            }
         }
 
-        private void TryStartRecording()
+        // Update is called once per frame
+        private void Update()
         {
-            if (_doneInitialMovement)
-            {
-                return;
-            }
+            _isJumpPressed = _playerInput.IsHoldingJump;
+            
+            _appliedMovement.x = _currentMovement.x;
+            _appliedMovement.z = _currentMovement.z;
 
-            _doneInitialMovement = true;
-            _movementPlayback.Record();
+            _characterController.Move(_appliedMovement * Time.deltaTime);
+
+            HandleGravity();
+            HandleJump();
         }
     }
 }
