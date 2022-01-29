@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using _Scripts;
 using DG.Tweening;
+using System;
+using System.Collections;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Speechbubble : MonoBehaviour
 {
 	public float delay = 0.1f;
+	public float delayDecreaseMultiplier = 0.25f;
 	public string fullText;
 	private string currentText = "";
 
@@ -15,16 +17,38 @@ public class Speechbubble : MonoBehaviour
 	[SerializeField] private Image boximage;
 	[SerializeField] private GameObject fullBox;
 
+	private IEnumerator _speechCoroutine;
+
+	private bool _isTextFinishedDisplaying;
+	private bool _isDelayDecreaseActive;
+
+	private Action _lastCallback;
+	
 	// Use this for initialization
 	void Awake()
 	{
 		fullBox.SetActive(false);
+
+		Inputs inputs = new Inputs();
+		inputs.Enable();
+
+		inputs.Player.Attack.performed += _ =>
+		{
+			if (_isTextFinishedDisplaying)
+			{
+				Close();
+			}
+			else
+			{
+				_isDelayDecreaseActive = true;	
+			}
+		};
 	}
 
 	[ContextMenu("TestOpen")]
 	void TestOpen()
 	{
-		Open("Test");
+		Open("Test", () => {});
 	}
 
 	IEnumerator ShowText()
@@ -33,24 +57,38 @@ public class Speechbubble : MonoBehaviour
 		{
 			currentText = fullText.Substring(0, i);
 			textbox.text = currentText;
-			yield return new WaitForSeconds(delay);
+			var nextDelay = delay * (_isDelayDecreaseActive ? delayDecreaseMultiplier : 1f);
+			yield return new WaitForSeconds(nextDelay);
 		}
+
+		_isDelayDecreaseActive = false;
+		_isTextFinishedDisplaying = true;
 	}
 
 	
-	void Open(string text)
+	public void Open(string text, Action callback)
 	{
+		_isTextFinishedDisplaying = false;
+		_lastCallback = callback;
+		
 		fullText = text;
 		fullBox.SetActive(true);
 		fullBox.transform.DOShakeScale(.5f, 2);
-		StartCoroutine(ShowText());
+		
+		if (_speechCoroutine != null)
+		{
+			StopCoroutine(_speechCoroutine);
+		}
+            
+		_speechCoroutine = ShowText();
+		StartCoroutine(_speechCoroutine);
 	}
 
 	[ContextMenu("Close")]
-	void Close()
+	public void Close()
 	{
 		fullBox.SetActive(false);
-		
-		StopCoroutine(ShowText());
+		StopCoroutine(_speechCoroutine);
+		_lastCallback?.Invoke();
 	}
 }

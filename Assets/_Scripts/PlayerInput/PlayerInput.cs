@@ -10,7 +10,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private Mouse _mouse;
 
     private Vector2 JumpVector => _inputs.Player.Jump.ReadValue<Vector2>();
-    public bool IsHoldingJump => JumpVector.y >= 1;
+    private Vector2 MoveVector => FeatureLocker.PlayerInputEnabled ? _inputs.Player.Move.ReadValue<Vector2>() : Vector2.zero;
+    
+    public bool IsHoldingJump => JumpVector.y >= 1 && FeatureLocker.PlayerInputEnabled;
     
     public event Action OnReplay;
     
@@ -19,9 +21,22 @@ public class PlayerInput : MonoBehaviour
         _playerMovement = _playerMovement ?? GetComponent<PlayerMovement>();
         _inputs = _inputs ?? new Inputs();
         _inputs.Enable();
-        //_inputs.Player.Attack.performed += _ => _playerController.Shoot(); <-- Left click
-        _inputs.Player.Jump.performed += _ => _playerMovement.Jump(JumpVector);
-        _inputs.Player.Replay.performed += _ => OnReplay?.Invoke();
+        //_inputs.Player.Attack.performed += _ => Test();
+        _inputs.Player.Jump.performed += _ =>
+        {
+            if (FeatureLocker.PlayerInputEnabled)
+            {
+                _playerMovement.Jump(JumpVector);
+            }
+        };
+        _inputs.Player.Replay.performed += _ =>
+        {
+            if (FeatureLocker.ReplayingEnabled && FeatureLocker.PlayerInputEnabled)
+            {
+                OnReplay?.Invoke();
+                enabled = false;
+            }
+        };
     }
 
     private void OnEnable()
@@ -37,16 +52,11 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        Move();
+        Move();    
     }
 
     private void Move()
     {
-        _playerMovement.Move(_inputs.Player.Move.ReadValue<Vector2>());
-    }
-
-    private void Jump()
-    {
-        _playerMovement.Jump(_inputs.Player.Jump.ReadValue<Vector2>());
+        _playerMovement.Move(MoveVector);
     }
 }

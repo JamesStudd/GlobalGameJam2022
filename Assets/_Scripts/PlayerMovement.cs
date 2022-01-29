@@ -34,6 +34,8 @@ namespace _Scripts
         private Coroutine _currentJumpResetRoutine = null;
 
         private bool _hasStartedRecording = false;
+
+        private bool CanMove => FeatureLocker.PlayerInputEnabled;
         
         // Awake is called earlier than Start in Unity's event life cycle
         private void Awake()
