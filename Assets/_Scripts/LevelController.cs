@@ -8,8 +8,6 @@ namespace _Scripts
         [SerializeField] private Vector3 _spawnPoint;
         [SerializeField] private int _respawnsAllowed;
         
-        [SerializeField] private GameEndView _gameEndView;
-
         private MovementPlayback _currentPlayer;
 
         private int _respawnsDone;
@@ -21,23 +19,10 @@ namespace _Scripts
         {
             FeatureLocker.SetPlayerInputEnabled(true);
             
-            GameEvents.OnGameEnd += OnGameEnd;
-
             _startTime = Time.realtimeSinceStartup;
             SpawnCount = 0;
         }
 
-        private void OnDestroy()
-        {
-            GameEvents.OnGameEnd -= OnGameEnd;
-        }
-
-        private void OnGameEnd(bool _)
-        {
-            var levelTime = Time.realtimeSinceStartup - _startTime;
-            _gameEndView.SetLevelTime(levelTime);
-        }
-        
         private void Start()
         {
             SpawnPlayer();

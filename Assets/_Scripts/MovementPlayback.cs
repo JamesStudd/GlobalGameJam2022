@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MovementPlayback : MonoBehaviour
 {
-    [SerializeField] private float _pauseTime;
     [SerializeField] private float _moveBackTime = 3f;
+    [SerializeField] private float _rotationFactorPerFrame = 15f;
 
     private Vector3 _startPosition;
 
@@ -93,6 +93,25 @@ public class MovementPlayback : MonoBehaviour
             for (int i = 0; i < _nums.Count; i += 3)
             {
                 transform.position = new Vector3(_nums[i], _nums[i + 1], _nums[i + 2]);
+
+                if (i + 3 < _nums.Count)
+                {
+                    Vector3 positionToLookAt;
+                    positionToLookAt.x = 0;
+                    positionToLookAt.y = 0;
+                    positionToLookAt.z = _nums[i]- _nums[i + 3];
+
+                    Quaternion currentRotation = transform.rotation;
+
+                    if (positionToLookAt != Vector3.zero)
+                    {
+                        // creates a new rotation based on where the player is currently pressing
+                        Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+                        // rotate the character to face the positionToLookAt            
+                        transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);   
+                    }
+                }
+
                 yield return new WaitForFixedUpdate();
             }
 

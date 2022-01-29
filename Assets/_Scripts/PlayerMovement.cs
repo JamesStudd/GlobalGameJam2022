@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _Scripts
 {
@@ -164,6 +165,17 @@ namespace _Scripts
 
             HandleGravity();
             HandleJump();
+        }
+
+        private void LateUpdate()
+        {
+            if (transform.position.z != 0)
+            {
+                var position = transform.position;
+                position = new Vector3(position.x, position.y, 0);
+                
+                transform.position = position;
+            }
         }
 
         private void TryStartRecording()
