@@ -1,5 +1,5 @@
-﻿using Sirenix.Utilities;
-using System.Linq;
+﻿using DG.Tweening;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace _Scripts
@@ -8,26 +8,42 @@ namespace _Scripts
     {
         [SerializeField] private WorldReactive[] _reactives;
         [SerializeField] private Transform _movableButton;
+        [SerializeField] private bool _isPermanent;
+        
+        [Header("Movement")]
+        [SerializeField] private bool _rotate;
         [SerializeField] private float _depressAmount;
+        [SerializeField] private Transform _rotateRoot;
+        [SerializeField] private Vector3 _rotateAmount;
+        [SerializeField] private float _rotateTime;
 
         public void Unlock()
         {
             _reactives.ForEach(e => e.Unlock());
-            var pos = _movableButton.position;
 
-            pos.y -= _depressAmount;
-
-            _movableButton.position = pos;
+            if (_rotate)
+            {
+                _rotateRoot.DOLocalRotate(_rotateAmount, _rotateTime);
+            }
+            else
+            {
+                var pos = _movableButton.position;
+                pos.y -= _depressAmount;
+                _movableButton.position = pos;   
+            }
         }
         
         public void Lock()
         {
-            _reactives.Where(e => !e.IsPermanent).ForEach(e => e.Lock());
+            if (_isPermanent)
+            {
+                return;
+            }
+            
+            _reactives.ForEach(e => e.Lock());
             
             var pos = _movableButton.position;
-
             pos.y += _depressAmount;
-
             _movableButton.position = pos;
         }
 
