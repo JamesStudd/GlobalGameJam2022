@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelId: 0
   _playerPrefab: {fileID: 749016927502361873, guid: 7e127e834837bd740a4cf1116053784e, type: 3}
-  _spawnPoint: {x: -16.25, y: 2, z: 0}
+  _spawnPoint: {x: -15.57, y: 2, z: 0}
   _respawnsAllowed: 2
   _fadeCanvasGroup: {fileID: 5683441666196485221}
   _timeToFade: 3
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a734762d264cf38f3d8ef23cabc400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speechbubble: {fileID: 0}
+  _speechbubble: {fileID: 1382686029465087040}
 --- !u!1 &1106161703787153107
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,3 +663,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2594593601701934708, guid: 10108ee25988bf441b21e908ca0b79cd, type: 3}
   m_PrefabInstance: {fileID: 4859612302428570959}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1382686029465087040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5782769507331664143, guid: 10108ee25988bf441b21e908ca0b79cd, type: 3}
+  m_PrefabInstance: {fileID: 4859612302428570959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119dc862bf77eb74dab12ca3117f3df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
