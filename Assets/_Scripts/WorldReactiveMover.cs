@@ -4,7 +4,7 @@ using UnityEngine;
 namespace _Scripts
 {
     // Is this the worst named class? I think so
-    public class WorldReactiveMover : MonoBehaviour
+    public class WorldReactiveMover : WorldReactive
     {
         [SerializeField] private Transform _root;
         [SerializeField] private Vector3 _targetPosition;
@@ -21,7 +21,7 @@ namespace _Scripts
             _endPosition = _initialPosition + _targetPosition;
         }
 
-        public void Unlock()
+        public override void Unlock()
         {
             if (_movementCoroutine != null)
             {
@@ -32,7 +32,7 @@ namespace _Scripts
             StartCoroutine(_movementCoroutine);
         }
 
-        public void Lock()
+        public override void Lock()
         {
             StopCoroutine(_movementCoroutine);
             
