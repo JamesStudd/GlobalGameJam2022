@@ -34,8 +34,11 @@ namespace _Scripts
 
         public override void Lock()
         {
-            StopCoroutine(_movementCoroutine);
-            
+            if (_movementCoroutine != null)
+            {
+                StopCoroutine(_movementCoroutine);
+            }
+
             _movementCoroutine = MovementCoroutine(_initialPosition);
             StartCoroutine(_movementCoroutine);
         }

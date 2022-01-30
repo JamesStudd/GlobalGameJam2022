@@ -48,7 +48,17 @@ namespace _Scripts
         
         public void Unlock()
         {
-            _reactives.ForEach(e => e.Unlock());
+            _reactives.ForEach(e =>
+            {
+                if (e.IsLocked)
+                {
+                    e.Unlock();    
+                }
+                else
+                {
+                    e.Lock();
+                }
+            });
 
             if (_rotate)
             {
@@ -66,7 +76,17 @@ namespace _Scripts
         
         public void Lock()
         {
-            _reactives.ForEach(e => e.Lock());
+            _reactives.ForEach(e =>
+            {
+                if (e.IsLocked)
+                {
+                    e.Unlock();    
+                }
+                else
+                {
+                    e.Lock();
+                }
+            });
             
             if (_rotate)
             {
