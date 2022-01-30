@@ -7635,6 +7635,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1857185082}
+  - {fileID: 1741204749}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10456,6 +10457,84 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715683300}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1741204748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1200751626}
+    m_Modifications:
+    - target: {fileID: 486761725073339172, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_Name
+      value: prefab_dialog_collision (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339174, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: _enablesReplay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339174, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: _dialogs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339174, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: _dialogs.Array.data[0]
+      value: '(If you ever mess up you can press R again, '
+      objectReference: {fileID: 0}
+    - target: {fileID: 486761725073339174, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+      propertyPath: _dialogs.Array.data[1]
+      value: to restart the level!)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+--- !u!4 &1741204749 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
+  m_PrefabInstance: {fileID: 1741204748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1746494753
 GameObject:
   m_ObjectHideFlags: 0
@@ -11328,11 +11407,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.57
+      value: -6.59
       objectReference: {fileID: 0}
     - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.26
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 486761725073339173, guid: 27ffac152b40bd441a98ad3a1c0213a6, type: 3}
       propertyPath: m_LocalPosition.z
