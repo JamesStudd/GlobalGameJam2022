@@ -14,6 +14,7 @@ namespace _Scripts.RoundManagement
 
         private const string MenuScene = "MenuScene";
         private const string CreditsScene = "CreditsScene";
+        private const string ThanksForPlayingScene = "ThanksForPlayingScene";
 
         public static bool HasAnotherLevel(int currentLevel)
         {
@@ -33,6 +34,11 @@ namespace _Scripts.RoundManagement
         public static void LoadCredits()
         {
             SceneManager.LoadScene(CreditsScene);
+        }
+
+        public static void LoadThanksForPlayingScene()
+        {
+            SceneManager.LoadScene(ThanksForPlayingScene);
         }
     }
 }
