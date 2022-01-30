@@ -48,7 +48,7 @@ MonoBehaviour:
   _spawnPoint: {x: -15.57, y: 2, z: 0}
   _respawnsAllowed: 2
   _fadeCanvasGroup: {fileID: 5683441666196485221}
-  _timeToFade: 3
+  _timeToFade: 1.5
 --- !u!1 &1106161702245299715
 GameObject:
   m_ObjectHideFlags: 0

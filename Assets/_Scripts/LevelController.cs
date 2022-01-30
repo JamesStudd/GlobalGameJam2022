@@ -47,26 +47,26 @@ namespace _Scripts
         
         private void OnGameEnd(bool victory)
         {
-            if (victory)
-            {
-                var levelTime = Time.realtimeSinceStartup - _startTime;
-                SaveManager.UpdateRound(_levelId, levelTime);
-
-                if (SceneController.HasAnotherLevel(_levelId))
-                {
-                    SceneController.LoadRound(_levelId + 1);
-                }
-                else
-                {
-                    SceneController.LoadThanksForPlayingScene();
-                }
-                
-                return;
-            }
-
             _fadeCanvasGroup.DOFade(1f, _timeToFade)
                 .OnComplete(() =>
                 {
+                    if (victory)
+                    {
+                        var levelTime = Time.realtimeSinceStartup - _startTime;
+                        SaveManager.UpdateRound(_levelId, levelTime);
+
+                        if (SceneController.HasAnotherLevel(_levelId))
+                        {
+                            SceneController.LoadRound(_levelId + 1);
+                        }
+                        else
+                        {
+                            SceneController.LoadThanksForPlayingScene();
+                        }
+                
+                        return;
+                    }
+
                     FeatureLocker.SetReplayingEnabled(false);
                     SceneController.LoadRound(_levelId);
                 });
