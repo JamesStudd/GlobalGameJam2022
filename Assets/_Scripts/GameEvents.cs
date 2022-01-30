@@ -7,6 +7,7 @@ namespace _Scripts
         public static event Action<bool> OnGameEnd;
         public static event Action<string[]> OnDialogStart;
         public static event Action OnDialogEnd;
+        public static event Action OnPlayerRewound;
 
         public static void GameEnd(bool victory)
         {
@@ -21,6 +22,11 @@ namespace _Scripts
         public static void DialogEnd()
         {
             OnDialogEnd?.Invoke();
+        }
+
+        public static void PlayerRewound()
+        {
+            OnPlayerRewound?.Invoke();
         }
     }
 }

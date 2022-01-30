@@ -1,3 +1,4 @@
+using _Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -88,6 +89,7 @@ public class MovementPlayback : MonoBehaviour
                 transform.position = _startPosition;
 
                 OnReplayed?.Invoke();
+                GameEvents.PlayerRewound();
             }
 
             for (int i = 0; i < _nums.Count; i += 3)

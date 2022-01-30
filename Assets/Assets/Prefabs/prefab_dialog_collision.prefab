@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogs:
   - EHHHHHEH HAHHAH AHA HHAHA HAHHHH AHAH AH HA HA HAHHHHHH
+  _enablesReplay: 0
+  _becomesAvailableAfterReplay: 0
+  _collider: {fileID: 4459005112431029587}
+  HasBeenCollidedWith: 0
 --- !u!65 &4459005112431029587
 BoxCollider:
   m_ObjectHideFlags: 0
