@@ -23,7 +23,7 @@ namespace _Scripts
 
             _playerMovement = GetComponent<PlayerMovement>();
 
-            if (LevelController.SpawnCount > 0)
+            if (FindObjectOfType<LevelController>().RespawnsDone > 1)
             {
                 gameObject.layer = _ignorePlayerLayer;
             }
@@ -38,7 +38,7 @@ namespace _Scripts
                 GameEvents.GameEnd(true);
             }
 
-            if (other.gameObject.CompareTag(WorldButtonTag) && IsMainPlayer)
+            if (other.gameObject.CompareTag(WorldButtonTag))
             {
                 other.GetComponent<WorldButton>().Unlock();
             }
@@ -69,7 +69,7 @@ namespace _Scripts
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.CompareTag(WorldButtonTag) && IsMainPlayer)
+            if (other.gameObject.CompareTag(WorldButtonTag))
             {
                 other.GetComponent<WorldButton>().Lock();
             }

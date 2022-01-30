@@ -33,8 +33,15 @@ public class PlayerInput : MonoBehaviour
         {
             if (FeatureLocker.ReplayingEnabled && FeatureLocker.PlayerInputEnabled)
             {
-                OnReplay?.Invoke();
-                enabled = false;
+                if (FindObjectOfType<LevelController>().CanSpawnAgain)
+                {
+                    OnReplay?.Invoke();
+                    enabled = false;    
+                }
+                else
+                {
+                    GameEvents.GameEnd(false);
+                }
             }
         };
     }
