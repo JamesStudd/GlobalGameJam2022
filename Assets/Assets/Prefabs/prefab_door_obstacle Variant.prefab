@@ -138,11 +138,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983738f3e7264c0d8447be1d4cf89efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPermanent: 0
   _root: {fileID: 901557642}
   _rootCollider: {fileID: 0}
   _targetRotation: {x: 0, y: 90, z: 0}
   _movementTime: 2
+--- !u!1 &5645770591946255453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5439161095366244816}
+  - component: {fileID: 4992105236666382066}
+  - component: {fileID: 3958564794979237884}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5439161095366244816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645770591946255453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.776, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.3}
+  m_Children: []
+  m_Father: {fileID: 4792270721744392076}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4992105236666382066
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645770591946255453}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &3958564794979237884
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645770591946255453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4975116022603917415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 89100d28e6fbe744c8d689c46f5a0038, type: 3}
       propertyPath: m_Name
-      value: prefab_door_obstacle
+      value: prefab_door_obstacle Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 89100d28e6fbe744c8d689c46f5a0038, type: 3}
       propertyPath: m_LocalRotation.w
