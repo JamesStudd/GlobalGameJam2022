@@ -22,7 +22,17 @@ namespace _Scripts
                 _collider.enabled = false;
             }
 
-            GameEvents.OnPlayerRewound += () => _collider.enabled = true;
+            GameEvents.OnPlayerRewound +=  EnableCollisions;
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.OnPlayerRewound -=  EnableCollisions;
+        }
+
+        private void EnableCollisions()
+        {
+            _collider.enabled = true;
         }
     }
 }

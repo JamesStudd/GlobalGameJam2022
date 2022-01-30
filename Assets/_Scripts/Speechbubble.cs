@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Speechbubble : MonoBehaviour
@@ -23,26 +24,34 @@ public class Speechbubble : MonoBehaviour
 	private bool _isDelayDecreaseActive;
 
 	private Action _lastCallback;
+	private Inputs _inputs;
 	
 	// Use this for initialization
 	void Awake()
 	{
 		fullBox.SetActive(false);
 
-		Inputs inputs = new Inputs();
-		inputs.Enable();
+		_inputs = new Inputs();
+		_inputs.Enable();
 
-		inputs.Player.Jump.performed += _ =>
+		_inputs.Player.Jump.performed += HandleJump;
+	}
+
+	private void OnDisable()
+	{
+		_inputs.Player.Jump.performed -= HandleJump;
+	}
+
+	private void HandleJump(InputAction.CallbackContext _)
+	{
+		if (_isTextFinishedDisplaying)
 		{
-			if (_isTextFinishedDisplaying)
-			{
-				Close();
-			}
-			else
-			{
-				_isDelayDecreaseActive = true;	
-			}
-		};
+			Close();
+		}
+		else
+		{
+			_isDelayDecreaseActive = true;	
+		}
 	}
 
 	[ContextMenu("TestOpen")]
