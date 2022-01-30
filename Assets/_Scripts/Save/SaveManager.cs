@@ -13,41 +13,11 @@ namespace _Scripts.Save
         
         public static Savegame Load()
         {
-            var cachedSavegame = PlayerPrefs.GetString(SaveGamePlayerPrefsKey, string.Empty);
-
-            if (cachedSavegame == string.Empty)
-            {
-                _savegame = Create();
-                return _savegame;
-            }
-
-            try
-            {
-                _savegame = JsonUtility.FromJson<Savegame>(cachedSavegame);
-                return _savegame;
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Failed to load savegame {e.Message}");
-                throw;
-            }
+            return Create();
         }
 
         public static void UpdateRound(int id, float time)
         {
-            _savegame ??= Load();
-            
-            var save = _savegame.RoundSavegames
-                .First(e => e.Id == id);
-
-            if (time < save.BestTime)
-            {
-                save.BestTime = time;    
-            }
-
-            save.HasCompleted = true;
-
-            Save();
         }
         
         public static void Save()
