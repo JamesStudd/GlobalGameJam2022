@@ -547,7 +547,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1417694447, guid: b1901f93015462343844d3c468278865, type: 3}
       propertyPath: _reactives.Array.size
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1417694447, guid: b1901f93015462343844d3c468278865, type: 3}
       propertyPath: _reactives.Array.data[0]
@@ -8085,9 +8085,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 901557642, guid: be60927da5465ab44835b9edda3affa4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071062
+      objectReference: {fileID: 0}
+    - target: {fileID: 901557642, guid: be60927da5465ab44835b9edda3affa4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071075
+      objectReference: {fileID: 0}
+    - target: {fileID: 901557642, guid: be60927da5465ab44835b9edda3affa4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1787882141, guid: be60927da5465ab44835b9edda3affa4, type: 3}
       propertyPath: _startOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787882141, guid: be60927da5465ab44835b9edda3affa4, type: 3}
+      propertyPath: _targetRotation.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3958564794979237884, guid: be60927da5465ab44835b9edda3affa4, type: 3}
       propertyPath: m_Size.y
