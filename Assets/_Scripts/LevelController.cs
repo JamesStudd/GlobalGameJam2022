@@ -16,10 +16,11 @@ namespace _Scripts
         
         private MovementPlayback _currentPlayer;
 
-        private int _respawnsDone;
+        private int _respawnsDone = 0;
         private float _startTime;
 
-        public static int SpawnCount = 0;
+        public int RespawnsDone => _respawnsDone;
+        public bool CanSpawnAgain => _respawnsDone < _respawnsAllowed;
         
         private void Awake()
         {
@@ -27,7 +28,11 @@ namespace _Scripts
             GameEvents.OnGameEnd += OnGameEnd;
             
             _startTime = Time.realtimeSinceStartup;
-            SpawnCount = 0;
+
+            if (_levelId > 0)
+            {
+                FeatureLocker.SetReplayingEnabled(true);
+            }
         }
 
         private void Start()
@@ -67,7 +72,6 @@ namespace _Scripts
             _currentPlayer.OnReplayed += SpawnPlayer;
 
             _respawnsDone++;
-            SpawnCount++;
         }
 
         private void OnDrawGizmosSelected()

@@ -136,6 +136,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1106161702003056399, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
+      propertyPath: _levelId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106161702003056399, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
       propertyPath: _spawnPoint.x
       value: -15.57
       objectReference: {fileID: 0}
