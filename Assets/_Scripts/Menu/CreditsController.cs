@@ -9,5 +9,10 @@ namespace _Scripts.Menu
         {
             SceneController.LoadMenu();
         }
+
+        public void OpenUrl(string url)
+        {
+            Application.OpenURL(url);
+        }
     }
 }

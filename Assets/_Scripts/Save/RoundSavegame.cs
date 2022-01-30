@@ -7,5 +7,6 @@ namespace _Scripts.Save
     {
         public int Id;
         public float BestTime;
+        public bool HasCompleted;
     }
 }

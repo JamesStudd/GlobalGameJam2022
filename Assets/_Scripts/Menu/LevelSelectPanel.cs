@@ -27,7 +27,9 @@ namespace _Scripts.Menu
                        AudioManager.Instance.PlayMusic(MusicId.Game);
                     });
 
-                var canPlay = i == 0 || savegame.RoundSavegames[i - 1].BestTime != 0;
+                instance.LevelText = (save.Id + 1).ToString();
+                
+                var canPlay = i == 0 || savegame.RoundSavegames[i - 1].HasCompleted;
 
                 instance.CanPlay = canPlay;
             }

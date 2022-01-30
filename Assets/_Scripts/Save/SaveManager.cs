@@ -45,6 +45,8 @@ namespace _Scripts.Save
                 save.BestTime = time;    
             }
 
+            save.HasCompleted = true;
+
             Save();
         }
         
@@ -58,7 +60,7 @@ namespace _Scripts.Save
         {
             return new Savegame
             {
-                RoundSavegames = SceneController.Scenes.Select(e => new RoundSavegame {Id = e.Key, BestTime = 0f}).ToArray()
+                RoundSavegames = SceneController.Scenes.Select(e => new RoundSavegame {Id = e.Key, BestTime = float.MaxValue, HasCompleted = false}).ToArray()
             };
         }
     }

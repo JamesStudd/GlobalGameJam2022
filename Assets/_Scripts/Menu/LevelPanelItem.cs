@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Scripts.Menu
@@ -7,6 +8,7 @@ namespace _Scripts.Menu
     {
         [SerializeField] private Button _button;
         [SerializeField] private GameObject _lockIcon;
+        [SerializeField] private TMP_Text _levelText;
         
         public Button Button => _button;
 
@@ -17,6 +19,11 @@ namespace _Scripts.Menu
                 _button.interactable = value;
                 _lockIcon.SetActive(!value);
             }
+        }
+
+        public string LevelText
+        {
+            set => _levelText.text = value;
         }
     }
 }
