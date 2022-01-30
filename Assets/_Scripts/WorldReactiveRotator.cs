@@ -9,12 +9,20 @@ namespace _Scripts
         [SerializeField] private Transform _rootCollider;
         [SerializeField] private Vector3 _targetRotation;
         [SerializeField] private float _movementTime;
-
+        [SerializeField] private bool _startOpen = false;
         private Vector3 _initialRotation;
         
         private void Awake()
         {
             _initialRotation = _root.localRotation.eulerAngles;
+        }
+
+        private void Start()
+        {
+            if(_startOpen)
+            {
+                Unlock();
+            }
         }
 
         public override void Unlock()
