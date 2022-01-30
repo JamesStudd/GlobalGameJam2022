@@ -1,5 +1,7 @@
 ﻿using DG.Tweening;
 using Sirenix.Utilities;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace _Scripts
@@ -17,6 +19,33 @@ namespace _Scripts
         [SerializeField] private Vector3 _rotateAmount;
         [SerializeField] private float _rotateTime;
 
+        private Vector3 _initialRotation;
+        
+        private bool _canCollide = true;
+        public bool CanCollide
+        {
+            get => _canCollide;
+            set
+            {
+                _canCollide = value;
+                StartCoroutine(DoAfterSeconds(0.25f, () => _canCollide = !value));
+            }
+        }
+
+        private void Awake()
+        {
+            _initialRotation = transform.rotation.eulerAngles;
+        }
+
+        public bool IsPermanent => _isPermanent;
+        [HideInInspector] public bool IsOn;
+
+        private IEnumerator DoAfterSeconds(float x, Action callback)
+        {
+            yield return new WaitForSeconds(x);
+            callback?.Invoke();
+        }
+        
         public void Unlock()
         {
             _reactives.ForEach(e => e.Unlock());
@@ -31,20 +60,26 @@ namespace _Scripts
                 pos.y -= _depressAmount;
                 _movableButton.position = pos;   
             }
+
+            IsOn = true;
         }
         
         public void Lock()
         {
-            if (_isPermanent)
-            {
-                return;
-            }
-            
             _reactives.ForEach(e => e.Lock());
             
-            var pos = _movableButton.position;
-            pos.y += _depressAmount;
-            _movableButton.position = pos;
+            if (_rotate)
+            {
+                _rotateRoot.DOLocalRotate(_initialRotation, _rotateTime);
+            }
+            else
+            {
+                var pos = _movableButton.position;
+                pos.y += _depressAmount;
+                _movableButton.position = pos; 
+            }
+
+            IsOn = false;
         }
 
         private void OnDrawGizmosSelected()

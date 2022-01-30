@@ -40,7 +40,25 @@ namespace _Scripts
 
             if (other.gameObject.CompareTag(WorldButtonTag))
             {
-                other.GetComponent<WorldButton>().Unlock();
+                var wb = other.GetComponent<WorldButton>();
+
+                if (wb.IsPermanent && !wb.CanCollide)
+                {
+                    return;
+                }
+                
+                if (wb.IsPermanent)
+                {
+                    wb.CanCollide = false;
+                }
+                
+                if (wb.IsPermanent && wb.IsOn)
+                {
+                    wb.Lock();
+                    return;
+                }
+
+                wb.Unlock();
             }
 
             if (other.gameObject.CompareTag(DialogCollisionTag))
@@ -71,7 +89,11 @@ namespace _Scripts
         {
             if (other.gameObject.CompareTag(WorldButtonTag))
             {
-                other.GetComponent<WorldButton>().Lock();
+                var wb = other.GetComponent<WorldButton>();
+                if (!wb.IsPermanent)
+                {
+                    wb.Lock();
+                }
             }
 
             if (other.gameObject.CompareTag(PlayerSpawnTag))
