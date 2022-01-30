@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
@@ -11,6 +12,12 @@ namespace _Scripts
         {
             GameEvents.OnDialogStart += HandleDialogStart;
             GameEvents.OnDialogEnd += HandleDialogEnd;
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.OnDialogStart -= HandleDialogStart;
+            GameEvents.OnDialogEnd -= HandleDialogEnd;
         }
 
         private void HandleDialogStart(string[] dialogs)

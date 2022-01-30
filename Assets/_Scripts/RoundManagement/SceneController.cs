@@ -7,7 +7,8 @@ namespace _Scripts.RoundManagement
     {
         private static readonly Dictionary<int, string> Scenes = new Dictionary<int, string>
         {
-            {0, "Level_01"}
+            {0, "Level_01"},
+            {1, "Level_02"},
         };
 
         private const string MenuScene = "MenuScene";
