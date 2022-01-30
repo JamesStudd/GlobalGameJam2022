@@ -10079,6 +10079,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GGJPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 683ce3fe390486343b6b7b9cf213077d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683ce3fe390486343b6b7b9cf213077d, type: 3}
 --- !u!4 &1076970117781701452 stripped
