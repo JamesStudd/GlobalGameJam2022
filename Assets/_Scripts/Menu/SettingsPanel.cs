@@ -9,11 +9,15 @@ namespace _Scripts.Menu
         [SerializeField] private Slider _effectsSlider;
         [SerializeField] private Slider _voiceSlider;
 
-        private void Awake()
+        private void Start()
+        {
+            Invoke(nameof(SetVolumes), 0.1f);
+        }
+
+        private void SetVolumes()
         {
             _musicSlider.value = AudioManager.Instance.MusicVolume;
             _effectsSlider.value = AudioManager.Instance.EffectVolume;
-            _voiceSlider.value = AudioManager.Instance.VoiceVolume;
         }
 
         public void SetEffectVolume(float value)
@@ -24,11 +28,6 @@ namespace _Scripts.Menu
         public void SetMusicVolume(float value)
         {
             AudioManager.Instance.SetMusicVolume(value);
-        }
-
-        public void SetVoiceVolume(float value)
-        {
-            AudioManager.Instance.SetVoiceVolume(value);
         }
     }
 }

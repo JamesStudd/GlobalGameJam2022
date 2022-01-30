@@ -26,7 +26,7 @@ namespace _Scripts
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
-
+            
             MusicVolume = 0.25f;
             EffectVolume = 0.75f;
         }
@@ -34,7 +34,6 @@ namespace _Scripts
 
         public static string PlayerPrefsMusicVolume = "time_boy_musicvolume";
         public static string PlayerPrefsEffectVolume = "time_boy_effectvolume";
-        public static string PlayerPrefsVoiceVolume = "time_boy_voicevolume";
         
         [SerializeField] private AudioSource _effectSource;
         [SerializeField] private AudioSource _voiceSource;
@@ -59,16 +58,6 @@ namespace _Scripts
             {
                 PlayerPrefs.SetFloat(PlayerPrefsEffectVolume, value);
                 _effectSource.volume = value;
-            }
-        }
-        
-        public float VoiceVolume
-        {
-            get => PlayerPrefs.GetFloat(PlayerPrefsVoiceVolume, 0.1f);
-            private set
-            {
-                PlayerPrefs.SetFloat(PlayerPrefsVoiceVolume, value);
-                _voiceSource.volume = value;
             }
         }
 
@@ -99,11 +88,6 @@ namespace _Scripts
         public void SetEffectVolume(float volume)
         {
             EffectVolume = volume;
-        }
-
-        public void SetVoiceVolume(float value)
-        {
-            VoiceVolume = value;
         }
     }
 }
