@@ -80,7 +80,7 @@ namespace _Scripts
                 }
             }
 
-            if (other.gameObject.CompareTag(KillBlockTag))
+            if (other.gameObject.CompareTag(KillBlockTag) && IsMainPlayer)
             {
                 other.gameObject.GetComponent<KillBlock>().Collide(gameObject);
                 AudioManager.Instance.PlayAudioClip(AudioId.Death);
