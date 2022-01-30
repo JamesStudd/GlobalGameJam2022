@@ -28,7 +28,7 @@ namespace _Scripts
             DontDestroyOnLoad(gameObject);
 
             MusicVolume = 0.25f;
-            EffectVolume = 0.5f;
+            EffectVolume = 0.75f;
         }
         #endregion
 
@@ -54,7 +54,7 @@ namespace _Scripts
 
         public float EffectVolume
         {
-            get => PlayerPrefs.GetFloat(PlayerPrefsEffectVolume, 0.5f);
+            get => PlayerPrefs.GetFloat(PlayerPrefsEffectVolume, 0.75f);
             private set
             {
                 PlayerPrefs.SetFloat(PlayerPrefsEffectVolume, value);
