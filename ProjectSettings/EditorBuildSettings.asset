@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ThanksForPlayingScene.unity
     guid: 918dd344cc0c62949a1ef44da96d3164
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_04.unity
+    guid: 148bc77ac2a926a4bb011d4a67c68f65
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_03.unity
+    guid: 1358816222df9b640a90f28ca666c896
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_02.unity
+    guid: 353217097a15a194a94b7c44b2303382
   m_configObjects: {}
