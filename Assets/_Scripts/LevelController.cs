@@ -1,7 +1,6 @@
 ﻿using _Scripts.RoundManagement;
 using _Scripts.Save;
 using DG.Tweening;
-using System;
 using UnityEngine;
 
 namespace _Scripts
@@ -53,7 +52,14 @@ namespace _Scripts
                 var levelTime = Time.realtimeSinceStartup - _startTime;
                 SaveManager.UpdateRound(_levelId, levelTime);
 
-                
+                if (SceneController.HasAnotherLevel(_levelId))
+                {
+                    SceneController.LoadRound(_levelId + 1);
+                }
+                else
+                {
+                    SceneController.LoadCredits();
+                }
                 
                 return;
             }

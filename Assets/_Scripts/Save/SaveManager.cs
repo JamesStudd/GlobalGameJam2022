@@ -1,26 +1,15 @@
-﻿using System;
+﻿using _Scripts.RoundManagement;
+using System;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace _Scripts.Save
 {
     public static class SaveManager
     {
-        private const string SaveGamePlayerPrefsKey = "time_boy_savegame";
-
-        private static int[] Rounds = new[]
-        {
-            0,
-        };
+        public const string SaveGamePlayerPrefsKey = "time_boy_savegame";
 
         private static Savegame _savegame;
-
-        [MenuItem("TimeBot/Print Player Prefs")]
-        public static void PrintPlayerPrefs()
-        {
-            Debug.Log(PlayerPrefs.GetString(SaveGamePlayerPrefsKey));
-        }
         
         public static Savegame Load()
         {
@@ -69,7 +58,7 @@ namespace _Scripts.Save
         {
             return new Savegame
             {
-                RoundSavegames = Rounds.Select(e => new RoundSavegame {Id = e, BestTime = 0f}).ToArray()
+                RoundSavegames = SceneController.Scenes.Select(e => new RoundSavegame {Id = e.Key, BestTime = 0f}).ToArray()
             };
         }
     }
