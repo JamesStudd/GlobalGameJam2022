@@ -6,7 +6,8 @@ namespace _Scripts.Menu
 {
     public class LevelSelectPanel : MonoBehaviour
     {
-        [SerializeField] private LevelPanelItem[] _levelButtons;
+        [SerializeField] private LevelPanelItem _levelPanelPrefab;
+        [SerializeField] private Transform _levelItemParent;
 
         private void Awake()
         {
@@ -15,8 +16,10 @@ namespace _Scripts.Menu
             for (int i = 0; i < savegame.RoundSavegames.Length; i++)
             {
                 var save = savegame.RoundSavegames[i];
-                
-                _levelButtons[i].Button
+
+                var instance = Instantiate(_levelPanelPrefab, _levelItemParent, false);
+
+                instance.Button
                     .onClick
                     .AddListener(() =>
                     {
@@ -25,7 +28,7 @@ namespace _Scripts.Menu
 
                 var canPlay = i == 0 || savegame.RoundSavegames[i - 1].BestTime != 0;
 
-                _levelButtons[i].CanPlay = canPlay;
+                instance.CanPlay = canPlay;
             }
         }
     }

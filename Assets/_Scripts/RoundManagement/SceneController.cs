@@ -5,7 +5,7 @@ namespace _Scripts.RoundManagement
 {
     public static class SceneController
     {
-        private static readonly Dictionary<int, string> Scenes = new Dictionary<int, string>
+        public static readonly Dictionary<int, string> Scenes = new Dictionary<int, string>
         {
             {0, "Level_01"},
             {1, "Level_02"},
@@ -14,6 +14,11 @@ namespace _Scripts.RoundManagement
         private const string MenuScene = "MenuScene";
         private const string CreditsScene = "CreditsScene";
 
+        public static bool HasAnotherLevel(int currentLevel)
+        {
+            return Scenes.ContainsKey(currentLevel + 1);
+        }
+        
         public static void LoadRound(int id)
         {
             SceneManager.LoadScene(Scenes[id]);
