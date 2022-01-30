@@ -192,10 +192,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1106161702003056399, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
-      propertyPath: _spawnPoint.x
-      value: -15.57
-      objectReference: {fileID: 0}
     - target: {fileID: 1106161703208738800, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -244,10 +240,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_necessary_components
       objectReference: {fileID: 0}
-    - target: {fileID: 1106161703739690824, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
-      propertyPath: _speechbubble
-      value: 
-      objectReference: {fileID: 2060648180}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
 --- !u!1001 &197183132
@@ -2340,17 +2332,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2060648180 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1382686029465087040, guid: cf907b5194788b34aaa8fd7b4ba41ebf, type: 3}
-  m_PrefabInstance: {fileID: 196027803}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119dc862bf77eb74dab12ca3117f3df1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2090448353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2868612610791835126, guid: 320bdc5b004d09b4d9e5db681ec10973, type: 3}
