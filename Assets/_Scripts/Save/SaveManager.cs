@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace _Scripts.Save
@@ -14,6 +15,12 @@ namespace _Scripts.Save
         };
 
         private static Savegame _savegame;
+
+        [MenuItem("TimeBot/Print Player Prefs")]
+        public static void PrintPlayerPrefs()
+        {
+            Debug.Log(PlayerPrefs.GetString(SaveGamePlayerPrefsKey));
+        }
         
         public static Savegame Load()
         {
@@ -37,6 +44,21 @@ namespace _Scripts.Save
             }
         }
 
+        public static void UpdateRound(int id, float time)
+        {
+            _savegame ??= Load();
+            
+            var save = _savegame.RoundSavegames
+                .First(e => e.Id == id);
+
+            if (time < save.BestTime)
+            {
+                save.BestTime = time;    
+            }
+
+            Save();
+        }
+        
         public static void Save()
         {
             var json = JsonUtility.ToJson(_savegame);
