@@ -58,7 +58,7 @@ namespace _Scripts
                 }
                 else
                 {
-                    SceneController.LoadCredits();
+                    SceneController.LoadThanksForPlayingScene();
                 }
                 
                 return;
