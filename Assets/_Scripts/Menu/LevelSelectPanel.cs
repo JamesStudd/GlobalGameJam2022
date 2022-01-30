@@ -28,7 +28,6 @@ namespace _Scripts.Menu
                     });
 
                 instance.LevelText = (save.Id + 1).ToString();
-                instance.FastestTimeText = save.HasCompleted ? $"Fastest Time: {save.BestTime:F2}" : string.Empty;
                 
                 var canPlay = i == 0 || savegame.RoundSavegames[i - 1].HasCompleted;
 

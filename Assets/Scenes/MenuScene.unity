@@ -246,18 +246,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 318699053857266133, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -334
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684526616433254553, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
-      propertyPath: m_CellSize.x
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684526616433254553, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
-      propertyPath: m_CellSize.y
-      value: 140
-      objectReference: {fileID: 0}
     - target: {fileID: 7386715335709277769, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
       propertyPath: m_Sprite
       value: 

@@ -13,7 +13,6 @@ namespace _Scripts.RoundManagement
             {3, "Level_04"},
             {4, "Level_05"},
             {5, "Level_06"},
-            {6, "Level_07"},
         };
 
         private const string MenuScene = "MenuScene";

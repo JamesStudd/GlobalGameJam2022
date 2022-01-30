@@ -9,7 +9,6 @@ namespace _Scripts.Menu
         [SerializeField] private Button _button;
         [SerializeField] private GameObject _lockIcon;
         [SerializeField] private TMP_Text _levelText;
-        [SerializeField] private TMP_Text _fastestTimeText;
         
         public Button Button => _button;
 
@@ -25,11 +24,6 @@ namespace _Scripts.Menu
         public string LevelText
         {
             set => _levelText.text = value;
-        }
-        
-        public string FastestTimeText
-        {
-            set => _fastestTimeText.text = value;
         }
     }
 }
