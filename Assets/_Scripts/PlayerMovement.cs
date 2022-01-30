@@ -116,6 +116,8 @@ namespace _Scripts
                 _jumpCount += 1;
                 _currentMovement.y = _initialJumpVelocity;
                 _appliedMovement.y = _initialJumpVelocity;
+                
+                AudioManager.Instance.PlayAudioClip(AudioId.Jump);
             }
             else if (!_isJumpPressed && _isJumping && _characterController.isGrounded)
             {

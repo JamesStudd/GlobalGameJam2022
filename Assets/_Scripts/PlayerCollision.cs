@@ -36,6 +36,7 @@ namespace _Scripts
                 Destroy(other.gameObject);
                 FeatureLocker.SetPlayerInputEnabled(false);
                 GameEvents.GameEnd(true);
+                AudioManager.Instance.PlayAudioClip(AudioId.Win);
             }
 
             if (other.gameObject.CompareTag(WorldButtonTag))
@@ -82,6 +83,7 @@ namespace _Scripts
             if (other.gameObject.CompareTag(KillBlockTag))
             {
                 other.gameObject.GetComponent<KillBlock>().Collide(gameObject);
+                AudioManager.Instance.PlayAudioClip(AudioId.Death);
             }
         }
 

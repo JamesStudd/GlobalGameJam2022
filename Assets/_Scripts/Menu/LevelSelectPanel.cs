@@ -23,7 +23,8 @@ namespace _Scripts.Menu
                     .onClick
                     .AddListener(() =>
                     {
-                       SceneController.LoadRound(save.Id); 
+                       SceneController.LoadRound(save.Id);
+                       AudioManager.Instance.PlayMusic(MusicId.Game);
                     });
 
                 var canPlay = i == 0 || savegame.RoundSavegames[i - 1].BestTime != 0;

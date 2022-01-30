@@ -66,6 +66,7 @@ public class Speechbubble : MonoBehaviour
 		{
 			currentText = fullText.Substring(0, i);
 			textbox.text = currentText;
+			//AudioManager.Instance.PlayAudioClip(AudioId.Voice);
 			var nextDelay = delay * (_isDelayDecreaseActive ? delayDecreaseMultiplier : 1f);
 			yield return new WaitForSeconds(nextDelay);
 		}

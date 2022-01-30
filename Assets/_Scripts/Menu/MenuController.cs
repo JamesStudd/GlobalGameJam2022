@@ -26,6 +26,7 @@ namespace _Scripts.Menu
         private void Awake()
         {
             _creditsButton.onClick.AddListener(SceneController.LoadCredits);
+            AudioManager.Instance.PlayMusic(MusicId.Menu);
         }
 
         public void GoToSettings()

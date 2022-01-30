@@ -9,13 +9,19 @@ namespace _Scripts.Editor
         [MenuItem("TimeBot/Print Player Prefs")]
         public static void PrintPlayerPrefs()
         {
-            Debug.Log(PlayerPrefs.GetString(SaveManager.SaveGamePlayerPrefsKey));
+            Debug.Log($"Music: {PlayerPrefs.GetFloat(AudioManager.PlayerPrefsMusicVolume)}");
+            Debug.Log($"Effects: {PlayerPrefs.GetFloat(AudioManager.PlayerPrefsEffectVolume)}");
+            Debug.Log($"Savegame: {PlayerPrefs.GetString(SaveManager.SaveGamePlayerPrefsKey)}");
+            Debug.Log($"Savegame: {PlayerPrefs.GetString(AudioManager.PlayerPrefsVoiceVolume)}");
         }
         
         [MenuItem("TimeBot/Clear Player Prefs")]
         public static void ClearPlayerPrefs()
         {
+            PlayerPrefs.DeleteKey(AudioManager.PlayerPrefsMusicVolume);
+            PlayerPrefs.DeleteKey(AudioManager.PlayerPrefsEffectVolume);
             PlayerPrefs.DeleteKey(SaveManager.SaveGamePlayerPrefsKey);
+            PlayerPrefs.DeleteKey(AudioManager.PlayerPrefsVoiceVolume);
         }
     }
 }

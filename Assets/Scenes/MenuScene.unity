@@ -123,6 +123,133 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &326905005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326905007}
+  - component: {fileID: 326905006}
+  m_Layer: 0
+  m_Name: voice_source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!82 &326905006
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326905005}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &326905007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326905005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1623322829}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &578159523
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +488,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -473,6 +600,7 @@ Transform:
   m_Children:
   - {fileID: 578159524}
   - {fileID: 730662961}
+  - {fileID: 326905007}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,6 +621,18 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 8300000, guid: 84e1cddfb9c3097459f69d70105d855d, type: 3}
+    - {fileID: 8300000, guid: a5d7982cdf9a2654fa942666cfd1d449, type: 3}
+    - {fileID: 8300000, guid: 2ca006662681a174297364248c19951b, type: 3}
+    - {fileID: 8300000, guid: 1e6155712997fda478e2a254613a9885, type: 3}
+    - {fileID: 8300000, guid: 07ded79293edb0841be26654e73b76eb, type: 3}
+    - {fileID: 8300000, guid: e5a43b72339d53843a8e410130ac72c1, type: 3}
+    - {fileID: 8300000, guid: b2163f8764900f943a06734bdd1c47c0, type: 3}
+    - {fileID: 8300000, guid: 229760d67d9dd9f43acfbbe607a5a5ba, type: 3}
+    - {fileID: 8300000, guid: b69c8082b01162b4c9cc23f2f3bbcd7b, type: 3}
+    - {fileID: 8300000, guid: c602eb71c7fca1b44a95e191d46b21ce, type: 3}
+    - {fileID: 8300000, guid: c7ad9c2963f233041ad6dadaa67dd5c7, type: 3}
+    - {fileID: 8300000, guid: 9adbced645e570e4c8f2fb7670e8d228, type: 3}
+    - {fileID: 8300000, guid: eaa60bd762743cc41ba12ba7237efbae, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -500,7 +640,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: _audioClips
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[_Scripts.AudioId, Assembly-CSharp],[UnityEngine.AudioClip,
+      Data: 0|System.Collections.Generic.Dictionary`2[[_Scripts.AudioId, Assembly-CSharp],[UnityEngine.AudioClip[],
         UnityEngine.AudioModule]], mscorlib
     - Name: comparer
       Entry: 7
@@ -517,7 +657,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 6
     - Name: 
       Entry: 7
       Data: 
@@ -525,8 +665,23 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
+      Entry: 7
+      Data: 2|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -537,7 +692,19 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
+      Entry: 7
+      Data: 3|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -549,7 +716,19 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 6
+      Entry: 7
+      Data: 4|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -561,7 +740,79 @@ MonoBehaviour:
       Entry: 3
       Data: 3
     - Name: $v
-      Entry: 6
+      Entry: 7
+      Data: 5|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: 6|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 7
+      Data: 7|UnityEngine.AudioClip[], UnityEngine.AudioModule
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -574,11 +825,11 @@ MonoBehaviour:
       Data: 
     - Name: _musicClips
       Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[_Scripts.MusicId, Assembly-CSharp],[UnityEngine.AudioClip,
+      Data: 8|System.Collections.Generic.Dictionary`2[[_Scripts.MusicId, Assembly-CSharp],[UnityEngine.AudioClip,
         UnityEngine.AudioModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[_Scripts.MusicId,
+      Data: 9|System.Collections.Generic.EnumEqualityComparer`1[[_Scripts.MusicId,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -599,8 +850,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -611,8 +862,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 12
     - Name: 
       Entry: 8
       Data: 
@@ -623,6 +874,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _effectSource: {fileID: 578159525}
+  _voiceSource: {fileID: 326905006}
   _musicSource: {fileID: 730662962}
 --- !u!1 &1920036477
 GameObject:
@@ -747,6 +999,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4080330811625785482, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080330811625785482, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080330811625785482, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080330812734268411, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080330812734268411, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7386715336974856507, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
       propertyPath: m_Name
       value: prefab_main_menu
@@ -833,6 +1105,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7386715336974856511, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126219559739482429, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142892105125003252, guid: 0b0f01adfcea5814f9d4abe83ccebbfd, type: 3}

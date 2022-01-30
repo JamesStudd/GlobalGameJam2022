@@ -10,43 +10,74 @@ namespace _Scripts
         #region Singleton
         private static AudioManager _instance;
 
-        public static AudioManager Instance { get { return _instance; } }
-        
-        private void Awake()
+        public static AudioManager Instance
         {
-            if (_instance != null && _instance != this)
+            get
             {
-                Destroy(this.gameObject);
-            } else {
-                _instance = this;
+                if(_instance == null)
+                {
+                    _instance = GameObject.FindObjectOfType<AudioManager>();
+                }
+
+                return _instance;
             }
+        }
+
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+
+            MusicVolume = 0.25f;
+            EffectVolume = 0.5f;
         }
         #endregion
 
-        private const string PlayerPrefsMusicVolume = "time_boy_musicvolume";
-        private const string PlayerPrefsEffectVolume = "time_boy_effectvolume";
+        public static string PlayerPrefsMusicVolume = "time_boy_musicvolume";
+        public static string PlayerPrefsEffectVolume = "time_boy_effectvolume";
+        public static string PlayerPrefsVoiceVolume = "time_boy_voicevolume";
         
         [SerializeField] private AudioSource _effectSource;
+        [SerializeField] private AudioSource _voiceSource;
         [SerializeField] private AudioSource _musicSource;
-        [SerializeField] private Dictionary<AudioId, AudioClip> _audioClips;
+        [SerializeField] private Dictionary<AudioId, AudioClip[]> _audioClips;
         [SerializeField] private Dictionary<MusicId, AudioClip> _musicClips;
 
-        private static float MusicVolume
+        public float MusicVolume
         {
-            get => PlayerPrefs.GetFloat(PlayerPrefsMusicVolume, 1.0f);
-            set => PlayerPrefs.SetFloat(PlayerPrefsMusicVolume, value);
+            get => PlayerPrefs.GetFloat(PlayerPrefsMusicVolume, 0.25f);
+            private set
+            {
+                PlayerPrefs.SetFloat(PlayerPrefsMusicVolume, value);
+                _musicSource.volume = value;
+            }
+        }
+
+        public float EffectVolume
+        {
+            get => PlayerPrefs.GetFloat(PlayerPrefsEffectVolume, 0.5f);
+            private set
+            {
+                PlayerPrefs.SetFloat(PlayerPrefsEffectVolume, value);
+                _effectSource.volume = value;
+            }
         }
         
-        private static float EffectVolume
+        public float VoiceVolume
         {
-            get => PlayerPrefs.GetFloat(PlayerPrefsEffectVolume, 1.0f);
-            set => PlayerPrefs.SetFloat(PlayerPrefsEffectVolume, value);
+            get => PlayerPrefs.GetFloat(PlayerPrefsVoiceVolume, 0.1f);
+            private set
+            {
+                PlayerPrefs.SetFloat(PlayerPrefsVoiceVolume, value);
+                _voiceSource.volume = value;
+            }
         }
 
         public void PlayAudioClip(AudioId audioId)
         {
-            var clip = _audioClips[audioId];
-            _effectSource.PlayOneShot(clip, EffectVolume);
+            var clips = _audioClips[audioId];
+            var randomClip = clips[Random.Range(0, clips.Length)];
+            
+            _effectSource.PlayOneShot(randomClip, EffectVolume);
         }
 
         public void PlayMusic(MusicId musicId)
@@ -68,6 +99,11 @@ namespace _Scripts
         public void SetEffectVolume(float volume)
         {
             EffectVolume = volume;
+        }
+
+        public void SetVoiceVolume(float value)
+        {
+            VoiceVolume = value;
         }
     }
 }

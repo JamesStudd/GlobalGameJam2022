@@ -36,7 +36,8 @@ public class PlayerInput : MonoBehaviour
                 if (FindObjectOfType<LevelController>().CanSpawnAgain)
                 {
                     OnReplay?.Invoke();
-                    enabled = false;    
+                    enabled = false;
+                    AudioManager.Instance.PlayAudioClip(AudioId.Rewind);
                 }
                 else
                 {
