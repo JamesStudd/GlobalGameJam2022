@@ -1,6 +1,7 @@
 ﻿using _Scripts.RoundManagement;
 using _Scripts.Save;
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 namespace _Scripts
@@ -35,6 +36,11 @@ namespace _Scripts
             }
         }
 
+        private void OnDestroy()
+        {
+            GameEvents.OnGameEnd -= OnGameEnd;
+        }
+
         private void Start()
         {
             SpawnPlayer();
@@ -45,12 +51,17 @@ namespace _Scripts
             if (victory)
             {
                 var levelTime = Time.realtimeSinceStartup - _startTime;
-                SaveManager.UpdateRound(_levelId, levelTime);    
+                SaveManager.UpdateRound(_levelId, levelTime);
+
+                
+                
+                return;
             }
 
             _fadeCanvasGroup.DOFade(1f, _timeToFade)
                 .OnComplete(() =>
                 {
+                    FeatureLocker.SetReplayingEnabled(false);
                     SceneController.LoadRound(_levelId);
                 });
         }

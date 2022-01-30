@@ -26,7 +26,8 @@ namespace _Scripts
 
             _tweener = transform.DOLocalRotate(rotation, _time, RotateMode.LocalAxisAdd)
                 .SetEase(_ease)
-                .SetLoops(-1, LoopType.Incremental);
+                .SetLoops(-1, LoopType.Incremental)
+                .SetLink(gameObject, LinkBehaviour.KillOnDestroy);
         }
 
         private void LateUpdate()
