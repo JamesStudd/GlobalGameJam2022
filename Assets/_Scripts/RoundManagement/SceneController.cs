@@ -12,7 +12,7 @@ namespace _Scripts.RoundManagement
 
         private const string MenuScene = "MenuScene";
         private const string CreditsScene = "CreditsScene";
-        
+
         public static void LoadRound(int id)
         {
             SceneManager.LoadScene(Scenes[id]);

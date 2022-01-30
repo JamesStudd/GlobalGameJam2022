@@ -1,4 +1,6 @@
-﻿using _Scripts.Save;
+﻿using _Scripts.RoundManagement;
+using _Scripts.Save;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Scripts
@@ -9,6 +11,8 @@ namespace _Scripts
         [SerializeField] private MovementPlayback _playerPrefab;
         [SerializeField] private Vector3 _spawnPoint;
         [SerializeField] private int _respawnsAllowed;
+        [SerializeField] private CanvasGroup _fadeCanvasGroup;
+        [SerializeField] private float _timeToFade;
         
         private MovementPlayback _currentPlayer;
 
@@ -31,10 +35,19 @@ namespace _Scripts
             SpawnPlayer();
         }
         
-        private void OnGameEnd(bool _)
+        private void OnGameEnd(bool victory)
         {
-            var levelTime = Time.realtimeSinceStartup - _startTime;
-            SaveManager.UpdateRound(_levelId, levelTime);
+            if (victory)
+            {
+                var levelTime = Time.realtimeSinceStartup - _startTime;
+                SaveManager.UpdateRound(_levelId, levelTime);    
+            }
+
+            _fadeCanvasGroup.DOFade(1f, _timeToFade)
+                .OnComplete(() =>
+                {
+                    SceneController.LoadRound(_levelId);
+                });
         }
 
         private void SpawnPlayer()

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Scripts
 {
@@ -9,14 +8,20 @@ namespace _Scripts
         private const string WorldButtonTag = "WorldButton";
         private const string PlayerSpawnTag = "PlayerSpawn";
         private const string DialogCollisionTag = "DialogCollision";
+        private const string KillBlockTag = "KillBlock";
 
         private int _ignorePlayerLayer;
         private int _playerLayer;
 
+        private PlayerMovement _playerMovement;
+        private bool IsMainPlayer => _playerMovement.enabled;
+        
         private void Awake()
         {
             _ignorePlayerLayer = LayerMask.NameToLayer("IgnorePlayer");
             _playerLayer = LayerMask.NameToLayer("Player");
+
+            _playerMovement = GetComponent<PlayerMovement>();
 
             if (LevelController.SpawnCount > 0)
             {
@@ -26,14 +31,14 @@ namespace _Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag(EndGameTag))
+            if (other.gameObject.CompareTag(EndGameTag) && IsMainPlayer)
             {
                 Destroy(other.gameObject);
                 FeatureLocker.SetPlayerInputEnabled(false);
                 GameEvents.GameEnd(true);
             }
 
-            if (other.gameObject.CompareTag(WorldButtonTag))
+            if (other.gameObject.CompareTag(WorldButtonTag) && IsMainPlayer)
             {
                 other.GetComponent<WorldButton>().Unlock();
             }
@@ -55,11 +60,16 @@ namespace _Scripts
                     FeatureLocker.SetReplayingEnabled(true);
                 }
             }
+
+            if (other.gameObject.CompareTag(KillBlockTag))
+            {
+                other.gameObject.GetComponent<KillBlock>().Collide(gameObject);
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.CompareTag(WorldButtonTag))
+            if (other.gameObject.CompareTag(WorldButtonTag) && IsMainPlayer)
             {
                 other.GetComponent<WorldButton>().Lock();
             }
@@ -69,7 +79,7 @@ namespace _Scripts
                 gameObject.layer = _playerLayer;
             }
             
-            if (other.gameObject.CompareTag(DialogCollisionTag))
+            if (other.gameObject.CompareTag(DialogCollisionTag) && IsMainPlayer)
             {
                 GameEvents.DialogEnd();
             }
